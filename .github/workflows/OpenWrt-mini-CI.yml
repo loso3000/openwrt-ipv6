@@ -41,25 +41,34 @@ jobs:
           sudo -E apt-get clean
           sudo timedatectl set-timezone "Asia/Shanghai"
       - name: Update feeds
+        env:
+          REPO_URL: https://github.com/coolsnowwolf/lede
+          REPO_BRANCH: master
         run: |
+          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+          cd openwrt
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           #sed -i 's/coolsnowwolf/sirpdboy/g' ./feeds.conf.default
           git clone https://github.com/sirpdboy/sirpdboy-package package/diy
           ./scripts/feeds update -a
       - name: Update package
+        working-directory: ./openwrt
         run: |
           curl -fsSL https://git.io/JUgLD | sh
           ./scripts/feeds install -a
           chmod -R 775 .
       - name: Generate configuration file
+        working-directory: ./openwrt
         run: |
           curl -fsSL https://git.io/JUgLS > .config
           make defconfig
       - name: Make download
+        working-directory: ./openwrt
         run: |
           make download -j8
           find dl -size -1024c -exec rm -f {} \;
       - name: Compile firmware
+        working-directory: ./openwrt
         run: |
           make -j$(nproc) || make -j1 V=s
           echo "======================="
@@ -74,8 +83,8 @@ jobs:
         run: |
           mkdir -p ./mini/firmware
           mkdir -p ./mini/package
-          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./mini/package
-          find ./bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./mini/firmware
+          cp -rf $(find ./openwrt/bin/ -type f -name "*.ipk") ./mini/package
+          find ./openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./mini/firmware
           cd ./mini/firmware
           gzip *.img
       - name: Upload Firmware
