@@ -42,25 +42,32 @@ jobs:
           sudo -E apt-get clean
           sudo timedatectl set-timezone "Asia/Shanghai"
       - name: Update feeds
+        env:
+          REPO_URL: https://github.com/coolsnowwolf/lede
+          REPO_BRANCH: master
         run: |
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           #sed -i 's/coolsnowwolf/sirpdboy/g' ./feeds.conf.default
           git clone https://github.com/sirpdboy/sirpdboy-package package/diy
           ./scripts/feeds update -a
       - name: Update package
+        working-directory: ./openwrt
         run: |
           curl -fsSL https://git.io/JUgLH | sh
           ./scripts/feeds install -a
           chmod -R 755 .
       - name: Generate configuration file
+        working-directory: ./openwrt
         run: |
           curl -fsSL https://git.io/JUgLQ > .config
           make defconfig
       - name: Make download
+        working-directory: ./openwrt
         run: |
           make download -j8
           find dl -size -1024c -exec rm -f {} \;
       - name: Compile firmware
+        working-directory: ./openwrt
         run: |
           make -j$(nproc) || make -j1 V=s
           echo "======================="
@@ -76,8 +83,8 @@ jobs:
         run: |
           mkdir -p ./new/firmware
           mkdir -p ./new/package
-          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./new/package
-          find bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./new/firmware
+          cp -rf $(find ./openwrt/bin/packages/ -type f -name "*.ipk") ./new/package
+          find ./openwrt/bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./new/firmware
           cd ./new/firmware
           gzip *.img
       - name: Upload Firmware
