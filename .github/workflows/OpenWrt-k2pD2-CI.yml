@@ -53,12 +53,12 @@ jobs:
       - name: Update package
         working-directory: ./openwrt
         run: |
-          curl -fsSL https://raw.githubusercontent.com/siropboy/other/master/patch/script/ly.sh | sh
+          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/ly.sh | sh
           ./scripts/feeds install -a
           chmod -R 775 .
       - name: Generate configuration file
         run: |
-          curl -fsSL https://raw.githubusercontent.com/siropboy/other/master/patch/x86-64/k2pd2.config > .config
+          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/x86-64/k2pd2.config > .config
           make defconfig
       - name: Make download
         working-directory: ./openwrt
