@@ -89,12 +89,12 @@ jobs:
       - name: Upload Firmware
         uses: actions/upload-artifact@main
         with:
-          name: SirpdboyOpenWrt-mini-Firmware
+          name: SirpdboyOpenWrt-ipv6-mini-Firmware
           path: ./mini/firmware
       - name: Upload  IPK
         uses: actions/upload-artifact@main
         with:
-          name: SirpdboyOpenWrt-mini-Ipk
+          name: SirpdboyOpenWrt-ipv6-mini-Ipk
           path: ./mini/package
       - name: Upload firmware to cowtransfer
         run: |
