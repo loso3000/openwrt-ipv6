@@ -102,6 +102,7 @@ jobs:
         with:
           name: SirpdboyOpenWrt-IPV4P-Ipk
           path: ./new1/package
+
       - name: Upload firmware to cowtransfer
         run: |
          curl -fsSL git.io/file-transfer | sh
@@ -110,5 +111,5 @@ jobs:
       - name: Upload Firmware wetransfer
         run: |
           curl -fsSL git.io/file-transfer | sh
-          ./transfer wet -s -p 16 --no-progress ./new/firmware 2>&1 | tee wetransfer.log
+          ./transfer wet -s -p 16 --no-progress ./new1/firmware 2>&1 | tee wetransfer.log
           echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
