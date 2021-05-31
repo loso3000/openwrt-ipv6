@@ -61,7 +61,7 @@ jobs:
       - name: Generate configuration file
         working-directory: ./openwrt
         run: |
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/x86-64/minialldrv.config  | sh
+          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/x86-64/minialldrv.config > .config
           make defconfig
       - name: Make download
         working-directory: ./openwrt
