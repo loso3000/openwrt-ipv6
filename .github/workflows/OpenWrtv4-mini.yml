@@ -53,6 +53,7 @@ jobs:
       - name: Update package
         working-directory: ./openwrt
         run: |
+          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/initipv4.sh | sh
           curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/uppackage_mini.sh | sh
           ./scripts/feeds install -a
           chmod -R 775 .
