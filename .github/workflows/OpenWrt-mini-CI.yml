@@ -12,12 +12,19 @@ on:
     types: started
 #  schedule:
 #    - cron: 0 21 */7 * * 
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: minialldrv.config
+  DIY_P1_SH: initipv6.sh
+  DIY_P2_SH: update_package_mini.sh
 
 jobs:
 
   build_openwrt:
 
-    name: OpenWrt-mini-Build 
+    name: OpenWrt_Build 
 
     runs-on: ubuntu-latest
 
@@ -29,7 +36,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-
       - name: Space cleanup
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -43,27 +49,29 @@ jobs:
           sudo -E apt-get clean
           sudo timedatectl set-timezone "Asia/Shanghai"
       - name: Update feeds
-        env:
-          REPO_URL: https://github.com/coolsnowwolf/lede
-          REPO_BRANCH: master
         run: |
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
           cd openwrt
+          #sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           #sed -i 's/coolsnowwolf/sirpdboy/g' ./feeds.conf.default
-          git clone https://github.com/sirpdboy/sirpdboy-package package/diy
+          git clone https://github.com/sirpdboy/sirpdboy-package ./package/diy
           ./scripts/feeds update -a
-      - name: Update package
-        working-directory: ./openwrt
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/initipv6.sh | sh
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/update_package_mini.sh | sh
           ./scripts/feeds install -a
-          chmod -R 775 .
+      - name: Update package
+        run: |
+         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ./openwrt/.config
+         chmod +x ./$DIY_P1_SH
+         chmod +x ./$DIY_P2_SH
+         cd openwrt
+         ../$DIY_P1_SH
+         ../$DIY_P2_SH
+         chmod -R 755 .
+      
       - name: Generate configuration file
         working-directory: ./openwrt
         run: |
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/x86-64/minialldrv.config > .config
           make defconfig
+
       - name: Make download
         working-directory: ./openwrt
         run: |
