@@ -15,11 +15,19 @@ on:
 #  schedule:
 #    - cron: 0 21 */7 * * 
 
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  FEEDS_CONF: feeds.conf.default
+  CONFIG_FILE: appdrv.config
+  DIY_P1_SH: initipv4.sh
+  DIY_P2_SH: uppackage.sh
+
 jobs:
 
   build_openwrt:
 
-    name: OpenWrtv4_Build 
+    name: OpenWrt_Build 
 
     runs-on: ubuntu-latest
 
@@ -44,28 +52,27 @@ jobs:
           sudo -E apt-get clean
           sudo timedatectl set-timezone "Asia/Shanghai"
       - name: Update feeds
-        env:
-          REPO_URL: https://github.com/coolsnowwolf/lede
-          REPO_BRANCH: master
         run: |
           git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
           cd openwrt
           #sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
           #sed -i 's/coolsnowwolf/sirpdboy/g' ./feeds.conf.default
-          git clone https://github.com/sirpdboy/sirpdboy-package package/diy
+          git clone https://github.com/sirpdboy/sirpdboy-package ./package/diy
           ./scripts/feeds update -a
-      - name: Update package
-        working-directory: ./openwrt
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/initipv4.sh | sh
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/script/uppackage.sh | sh
           ./scripts/feeds install -a
-          chmod -R 755 .
+      - name: Update package
+        run: |
+         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ./openwrt/.config
+         chmod +x ./$DIY_P1_SH
+         chmod +x ./$DIY_P2_SH
+         cd openwrt
+         ../$DIY_P1_SH
+         ../$DIY_P2_SH
+         chmod -R 755 .
+      
       - name: Generate configuration file
         working-directory: ./openwrt
         run: |
-          #cd openwrt
-          curl -fsSL https://raw.githubusercontent.com/loso3000/other/master/patch/x86-64/appdrv.config > .config
           make defconfig
       - name: Make download
         working-directory: ./openwrt
