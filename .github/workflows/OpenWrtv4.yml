@@ -20,7 +20,7 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: appdrv.config
-  DIY_P1_SH: initipv4.sh
+  DIY_P1_SH: ipv4.sh
   DIY_P2_SH: uppackage.sh
 
 jobs:
