@@ -54,8 +54,8 @@ rm -rf ./package/lean/default-settings
 # rm -rf ./package/lean/luci-app-docker
 # rm -rf ./package/lean/luci-app-dockerman
 # rm -rf ./package/lean/luci-lib-docker
-rm -rf .package/diy/luci-lib-docker
-rm -rf .package/diy/luci-app-dockerman
+rm -rf ./package/diy/luci-lib-docker
+rm -rf ./package/diy/luci-app-dockerman
 rm -rf ./package/lean/trojan
 rm -rf ./feeds/packages/build/wsdd2
 rm -rf ./package/build/openwrt-fullconenat 
