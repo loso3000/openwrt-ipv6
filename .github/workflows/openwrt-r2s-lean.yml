@@ -116,8 +116,6 @@ jobs:
           echo ${{ env.date4 }} > version.txt
           rename -v "s/^openwrt/${{ env.date4 }}-openwrt/" *
           rename -v "s/friendlyarm_//" *
-          md5=$((md5sum *squashfs-sysupgrade* || md5sum *squashfs-combined*) | awk '{print $1}') 2>/dev/null
-          echo $md5 >> version.txt
           gzip *.*
   
       - name: Upload firmware to cowtransfer
