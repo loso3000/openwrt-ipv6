@@ -30,7 +30,6 @@ CONFIG_PACKAGE_ppp-mod-pptp=y  #VPN客户端
 CONFIG_PACKAGE_kmod-vmxnet3=y
 CONFIG_PACKAGE_kmod-pcnet32=y
 # add upnp
-CONFIG_PACKAGE_irqbalance=n
 CONFIG_PACKAGE_miniupnpd-igdv1=y
 CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-boostupnp=n
