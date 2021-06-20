@@ -108,7 +108,7 @@ jobs:
       - name: Prepare Artifact
         run: |
           mkdir ./firmware 
-          find ./openwrt/bin/targets/b -name "*combined*" -or -name "*sysupgrade*" | xargs -i mv -f {} ./firmware/
+          find ./openwrt/bin/targets/ -name "*combined*" -or -name "*sysupgrade*" | xargs -i mv -f {} ./firmware/
           cp openwrt/.config  ./firmware/r2s.config
           cd ./firmware
           rename -v "s/friendlyarm_//" *
