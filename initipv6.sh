@@ -41,6 +41,7 @@ rm -rf ./feeds/packages/admin/netdata && svn co https://github.com/sirpdboy/sirp
 rm -rf ./feeds/packages/net/mwan3 && svn co https://github.com/sirpdboy/build/trunk/mwan3 ./feeds/packages/net/mwan3
 rm -rf ./feeds/packages/net/https-dns-proxy  && svn co https://github.com/Lienol/openwrt-packages/trunk/net/https-dns-proxy ./feeds/packages/net/https-dns-proxy
 rm -rf ./feeds/packages/devel/ninja   && svn co https://github.com/Lienol/openwrt-packages/trunk/devel/ninja feeds/packages/devel/ninja
+rm -rf ./feeds/packages/net/miniupnpd  && svn co https://github.com/sirpdboy/build/trunk/miniupnpd ./feeds/packages/net/miniupnpd
 #rm -rf ./package/diy/autocore
 rm -rf ./package/build/mwan3
 rm -rf ./package/build/set/autocore
@@ -53,7 +54,7 @@ rm -rf ./package/lean/luci-app-ramfree
 rm -rf ./package/lean/luci-app-arpbind
 rm -rf ./package/lean/luci-app-docker
 rm -rf ./package/lean/luci-app-dockerman
-rm -rf ./package/lean/luci-lib-docker
+rm -rf ./package/lean/dockerd
 # rm -rf ./package/diy/luci-lib-docker
 # rm -rf ./package/diy/luci-app-dockerman
 
