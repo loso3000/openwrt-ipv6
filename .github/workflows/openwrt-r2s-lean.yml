@@ -109,11 +109,11 @@ jobs:
         run: |
           mkdir ./firmware 
           find ./openwrt/bin/targets/ -name "*combined*" -or -name "*sysupgrade*" | xargs -i mv -f {} ./firmware/
-          cp openwrt/.config  ./firmware/r2s.config
-          cd ./firmware
-          rename -v "s/friendlyarm_//" *
+          # cp openwrt/.config  ./firmware/r2s.config
+          # cd ./firmware
+          # rename -v "s/friendlyarm_//" *
           # gzip *.*
-  
+
       - name: Upload firmware to cowtransfer
         run: |
          curl -fsSL git.io/file-transfer | sh
