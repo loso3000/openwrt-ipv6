@@ -15,6 +15,10 @@ echo '---------------------------------' >> ./package/base-files/files/etc/banne
 #cat ./package/build/set/Config-kernel.in   > ./config/Config-kernel.in
 #echo  'CONFIG_BINFMT_MISC=y' >> ./package/target/linux/x86/config-5.4
 
+
+#echo '默认开启 Irqbalance'
+#sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqbalance.config
+
 #内核设置 甜糖
 # find target/linux -path "target/linux/*/config-*" | xargs -i sed -i '$a CONFIG_ACPI=y\nCONFIG_X86_ACPI_CPUFREQ=y\n \
 # CONFIG_NR_CPUS=128\nCONFIG_FAT_DEFAULT_IOCHARSET="utf8"\nCONFIG_CRYPTO_CHACHA20_NEON=y\nCONFIG_CRYPTO_CHACHA20POLY1305=y\nCONFIG_BINFMT_MISC=y' {}
