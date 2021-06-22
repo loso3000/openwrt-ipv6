@@ -84,8 +84,10 @@ echo '灰色歌曲'
 rm -rf ./package/lean/luci-app-unblockmusic
 git clone https://github.com/immortalwrt/luci-app-unblockneteasemusic.git  ./package/diy/luci-app-unblockneteasemusic
 sed -i 's/解除网易云音乐播放限制/解锁灰色歌曲/g' ./package/diy/luci-app-unblockneteasemusic/luasrc/controller/unblockneteasemusic.lua
-sed -i 's/libupstream-openssl/libustream-openssl/g' ./package/diy/luci-app-unblockneteasemusic/Makefile
+# sed -i 's/libupstream-openssl/libustream-openssl/g' ./package/diy/luci-app-unblockneteasemusic/Makefile
 
+echo '默认开启 Irqbalance'
+sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqbalance.config
 
 # git clone https://github.com/garypang13/luci-app-bypass.git package/luci-app-bypass
 # find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-redir/shadowsocksr-libev-alt/g' {}
