@@ -53,7 +53,7 @@ CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_autosamba-ksmbd=n
 CONFIG_PACKAGE_autosamba-samba4=y
 # CONFIG_PACKAGE_luci-app-accesscontrol is not set
-CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+CONFIG_PACKAGE_luci-app-adbyby-plus=y
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-advanced=y
 CONFIG_PACKAGE_luci-app-autotimeset=n
