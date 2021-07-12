@@ -217,6 +217,9 @@ find ./ -name *.rej | xargs rm -f
 # Add execute permission for ipv6-helper
 #chmod +x /bin/ipv6-helper
 
+sed -i 's+"), 10)/+"), 1)/g' ./package/lean/luci-app-ssr-plus//luasrc/controller/shadowsocksr.lua  #shadowsocksr
+sed -i 'sh"), 50)/h"), 9)/g' ./package/diy/luci-app-openclash/luasrc/controller/openclash.lua   #openclash
+
 PKG_Finder() {
 	local Result
 	[[ $# -ne 3 ]] && {
