@@ -217,3 +217,16 @@ find ./ -name *.rej | xargs rm -f
 # sed -i 's/option check_signature/# option check_signature/g' /etc/opkg.conf
 # Add execute permission for ipv6-helper
 #chmod +x /bin/ipv6-helper
+
+sed -i 's+"), 10)/+"), 1)/g' ./package/lean/luci-app-ssr-plus//luasrc/controller/shadowsocksr.lua  #shadowsocksr
+sed -i 'sh"), 50)/h"), 9)/g' ./package/diy/luci-app-openclash/luasrc/controller/openclash.lua   #openclash
+
+PKG_Finder() {
+	local Result
+	[[ $# -ne 3 ]] && {
+		TIME "Usage: PKG_Finder <f | d> Search_Path Target_Name/Target_Path"
+		return 0
+	}
+	Result=$(find $2 -name $3 -type $1 -exec echo {} \;)
+	[[ -n ${Result} ]] && echo "${Result}"
+}
