@@ -14,6 +14,9 @@ echo '---------------------------------' >> ./package/base-files/files/etc/banne
 #内核设置 甜糖
 #cat ./package/build/set/Config-kernel.in   > ./config/Config-kernel.in
 #echo  'CONFIG_BINFMT_MISC=y' >> ./package/target/linux/x86/config-5.4
+for X in $(ls -1 target/linux/x86 | grep "config-"); do echo -e "\n$(cat ./package/build/DRM-I915)" >> target/linux/x86/${X}; done
+# sed -i "/dns_caching_dns/d" $(PKG_Finder d package luci-app-turboacc)/root/etc/config/turboacc
+# echo "	option dns_caching_dns '223.5.5.5,114.114.114.114'" >> $(PKG_Finder d package luci-app-turboacc)/root/etc/config/turboacc
 
 
 #echo '默认开启 Irqbalance'
