@@ -54,9 +54,12 @@ CONFIG_PACKAGE_luci-app-rebootschedule=y
 # CONFIG_PACKAGE_luci-app-autoreboot is not set
 CONFIG_PACKAGE_luci-app-control-timewol=n
 CONFIG_PACKAGE_luci-app-control-weburl=y
+CONFIG_PACKAGE_luci-app-control-webrestriction=y
+CONFIG_PACKAGE_luci-app-control-speedlimit=y
+CONFIG_PACKAGE_luci-app-webadmin=y
 CONFIG_PACKAGE_luci-app-cpulimit=y
 CONFIG_PACKAGE_luci-app-diskman=y
-CONFIG_PACKAGE_luci-app-eqos=y
+CONFIG_PACKAGE_luci-app-eqos=n
 CONFIG_PACKAGE_luci-app-hd-idle=y
 # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
 CONFIG_PACKAGE_luci-app-jd-dailybonus=y
