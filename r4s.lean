@@ -24,7 +24,7 @@ CONFIG_PACKAGE_kmod-fuse=y
 CONFIG_PACKAGE_kmod-fs-ext4=y
 CONFIG_PACKAGE_kmod-fs-squashfs=y
 #ksmbd
-#CONFIG_PACKAGE_kmod-fs-ksmbd=y
+#CONFIG_PACKAGE_kmod-fs-ksmbd=n
 #CONFIG_PACKAGE_kmod-nls-utf8=y
 #CONFIG_PACKAGE_kmod-nls-cp936=y
 #CONFIG_PACKAGE_kmod-nls-iso8859-1=y
