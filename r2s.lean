@@ -16,12 +16,13 @@ CONFIG_PACKAGE_kmod-fs-nfs=y
 CONFIG_PACKAGE_kmod-fs-nfs-v3=y
 CONFIG_PACKAGE_kmod-fs-nfs-v4=y
 CONFIG_PACKAGE_kmod-fs-antfs=y
+# CONFIG_PACKAGE_kmod-fs-ntfs  is not set
 CONFIG_PACKAGE_kmod-fuse=y
 CONFIG_PACKAGE_kmod-fs-ext4=y
 CONFIG_PACKAGE_kmod-fs-squashfs=y
 #ksmbd
-#CONFIG_PACKAGE_kmod-fs-ksmbd=y
-#CONFIG_PACKAGE_kmod-nls-utf8=y
+#CONFIG_PACKAGE_kmod-fs-ksmbd=n
+CONFIG_PACKAGE_kmod-nls-utf8=y
 #CONFIG_PACKAGE_kmod-nls-cp936=y
 #CONFIG_PACKAGE_kmod-nls-iso8859-1=y
 CONFIG_PACKAGE_kmod-ksmbd-utils=y
